@@ -400,7 +400,7 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
-  <Target Name="DeleteBinObjFolders" BeforeTargets="Clean">
+  <!--<Target Name="DeleteBinObjFolders" BeforeTargets="Clean">
     <RemoveDir Directories=".\obj"></RemoveDir>
-  </Target>
+  </Target>-->
 </Project>
