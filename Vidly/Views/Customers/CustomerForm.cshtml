@@ -1,4 +1,4 @@
-﻿@model Vidly.ViewModels.NewCustomerViewModel
+﻿@model Vidly.ViewModels.CustomerFormViewModel
 @{
     ViewBag.Title = "New";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,7 +10,7 @@
     Html.BeginForm returns a disposable object and just renders beginning tag of <form> element
     So when we put it in a using block it will also render closing tag of <form> element.
 *@
-@using (Html.BeginForm("Create", "Customers"))
+@using (Html.BeginForm("Save", "Customers"))
 {
     <div class="form-group">
         @Html.LabelFor(c=> c.Customer.Name)
@@ -18,17 +18,18 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(c => c.Customer.BirthDate)
-        @Html.TextBoxFor(c => c.Customer.BirthDate, new { @class = "form-control" })
+        @Html.TextBoxFor(c => c.Customer.BirthDate,"{0:d MMM yyyy}", new { @class = "form-control" })
     </div>
-    <div class="checkbox">
-        <label>
-         @Html.CheckBoxFor(c => c.Customer.IsSubscribedToNewsletter) Subscribed To Newsletter?
-        </label>
-    </div>
+
     <div class="form-group">
         @Html.LabelFor(c=> c.Customer.MembershipTypeId)
         @Html.DropDownListFor(c => c.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes,"Id","Name"),"Select Membership Type", new { @class = "form-control" })
     </div>
-
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(c => c.Customer.IsSubscribedToNewsletter) Subscribed To Newsletter?
+        </label>
+    </div> 
+    @Html.HiddenFor(m => m.Customer.Id);
     <button type="submit" class="btn btn-primary">Save</button>
 }
